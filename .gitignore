@@ -1,0 +1,27 @@
+# Ignore CMake build directories
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore libtorch and downloaded models
+models/
+data/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+*.vscode/
+*.idea/
+*.swp
+*.swo
+
+# Compiled objects
+*.o
+*.out
+*.a
+*.so
+*.exe
