@@ -7,12 +7,12 @@ This project implements a handwritten digit classifier using the **MNIST** datas
 
 ##  Features
 
-- ✅ Written in modern **C++17**
-- ✅ Uses **LibTorch** (PyTorch C++ frontend)
-- ✅ **CUDA GPU acceleration** (automatically used if available)
-- ✅ MNIST training + test evaluation
-- ✅ Modular code (`Net`, `Evaluate`, `main`)
-- ✅ Model saving & loading (`torch::save` / `torch::load`)
+-  Written in modern **C++17**
+-  Uses **LibTorch** (PyTorch C++ frontend)
+-  **CUDA GPU acceleration** (automatically used if available)
+-  MNIST training + test evaluation
+-  Modular code (`Net`, `Evaluate`, `main`)
+-  Model saving & loading (`torch::save` / `torch::load`)
 
 ---
 
@@ -44,7 +44,7 @@ cppminist/
 
 ---
 
-## 🛠️ Build & Run
+##  Build & Run
 
 ### 1. Clone this repo
 
@@ -77,12 +77,12 @@ make
 
 ```ymal
 
-✅ Using device: GPU
+ Using device: GPU
 Epoch: 1 [57664/60000] Loss: 0.291559
-🧪 Test Accuracy: 93.84%
-💾 Model saved to ./models/mnist_model.pt
-📂 Loaded model, evaluating:
-🧪 Test Accuracy: 93.84%
+ Test Accuracy: 93.84%
+ Model saved to ./models/mnist_model.pt
+ Loaded model, evaluating:
+ Test Accuracy: 93.84%
 
 ```
 
