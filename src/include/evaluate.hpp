@@ -4,7 +4,7 @@
 #include <torch/data/datasets/mnist.h>
 #include <torch/data/samplers/random.h> 
 
-#include "/home/ashishverma/Documents/cppminist/src/include/evaluate.hpp"
+#include "/home/ashishverma/Documents/cppmnist/src/include/evaluate.hpp"
 #include <iostream>
 #include <iomanip>
 #include "net.hpp"

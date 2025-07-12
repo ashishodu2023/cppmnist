@@ -4,8 +4,8 @@
 #include <iostream>
 #include <filesystem>
 
-#include "/home/ashishverma/Documents/cppminist/src/include/evaluate.hpp"
-#include "/home/ashishverma/Documents/cppminist/src/include/net.hpp"
+#include "/home/ashishverma/Documents/cppmnist/src/include/evaluate.hpp"
+#include "/home/ashishverma/Documents/cppmnist/src/include/net.hpp"
 
 int main() {
     torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
@@ -15,13 +15,13 @@ int main() {
     model.to(device);
 
     const int64_t batch_size = 64;
-    const size_t epochs = 1;
+    const size_t epochs = 10;
 
-    auto train_dataset = torch::data::datasets::MNIST("./data")
+    auto train_dataset = torch::data::datasets::MNIST("../data")
         .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
         .map(torch::data::transforms::Stack<>());
 
-    auto test_dataset = torch::data::datasets::MNIST("./data", torch::data::datasets::MNIST::Mode::kTest)
+    auto test_dataset = torch::data::datasets::MNIST("../data", torch::data::datasets::MNIST::Mode::kTest)
         .map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
         .map(torch::data::transforms::Stack<>());
 
