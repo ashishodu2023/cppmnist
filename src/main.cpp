@@ -7,6 +7,10 @@
 #include "/home/ashishverma/Documents/cppmnist/src/include/evaluate.hpp"
 #include "/home/ashishverma/Documents/cppmnist/src/include/net.hpp"
 
+#include "matplotlibcpp.h"
+namespace plt = matplotlibcpp;
+
+
 int main() {
     torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
     std::cout << " Using device: " << (device.is_cuda() ? "GPU" : "CPU") << std::endl;
@@ -33,6 +37,8 @@ int main() {
 
     torch::optim::SGD optimizer(model.parameters(), 0.01);
 
+    std::vector<float> loss_values;  // Store training loss here
+
     for (size_t epoch = 1; epoch <= epochs; ++epoch) {
         size_t batch_idx = 0;
         model.train();
@@ -47,6 +53,8 @@ int main() {
             loss.backward();
             optimizer.step();
 
+            loss_values.push_back(loss.item<float>());  // Save loss
+
             if (batch_idx++ % 100 == 0) {
                 std::cout << "Epoch: " << epoch
                           << " [" << batch_idx * batch.data.size(0) << "/60000]"
@@ -57,10 +65,8 @@ int main() {
         evaluate(model, *test_loader, device);
     }
 
-    // Ensure model directory exists
+    // Save the model
     std::filesystem::create_directories("./models");
-
-    // === Save the model ===
     {
         torch::serialize::OutputArchive archive;
         model.save(archive);
@@ -68,7 +74,7 @@ int main() {
         std::cout << "Model saved to ./models/mnist_model.pt\n";
     }
 
-    // === Load the model ===
+    // Load and evaluate the model
     Net loaded_model;
     {
         torch::serialize::InputArchive archive;
@@ -77,8 +83,15 @@ int main() {
         loaded_model.to(device);
         std::cout << "Loaded model, evaluating:\n";
     }
-
     evaluate(loaded_model, *test_loader, device);
+
+    // Plot training loss
+    plt::figure_size(800, 600);
+    plt::plot(loss_values);
+    plt::title("Training Loss over Batches");
+    plt::xlabel("Batch Number");
+    plt::ylabel("Loss");
+    plt::show();
 
     return 0;
 }

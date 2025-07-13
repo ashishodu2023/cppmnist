@@ -35,3 +35,16 @@ install(TARGETS mnist_classifier DESTINATION bin)
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY models/ DESTINATION share/mnist_classifier/models OPTIONAL)
 include_directories(${CMAKE_SOURCE_DIR}/src/include)
+
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development NumPy)
+
+include_directories(
+    ${Python3_INCLUDE_DIRS}
+    ${Python3_NumPy_INCLUDE_DIRS}
+    ${PROJECT_SOURCE_DIR}/matplotlib-cpp
+)
+
+target_link_libraries(mnist_classifier
+    ${Python3_LIBRARIES}
+)
