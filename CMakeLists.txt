@@ -48,3 +48,4 @@ include_directories(
 target_link_libraries(mnist_classifier
     ${Python3_LIBRARIES}
 )
+
